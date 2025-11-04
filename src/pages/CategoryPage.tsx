@@ -1,92 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useParams } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 
-const Index = () => {
+const CategoryPage = () => {
+  const { category } = useParams();
+  
+  // Convert URL format to database format
+  const categoryMap: Record<string, string> = {
+    "smartphones": "Smartphones",
+    "laptops": "Laptops",
+    "tablets": "Tablets",
+    "laptop-accessories": "Laptop Accessories",
+    "phone-accessories": "Phone Accessories",
+    "tablet-accessories": "Tablet Accessories",
+  };
+
+  const dbCategory = categoryMap[category || ""];
+
   const { data: products, isLoading } = useQuery({
-    queryKey: ["all-products"],
+    queryKey: ["products", dbCategory],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("products")
         .select("*")
+        .eq("category", dbCategory)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
       return data;
     },
+    enabled: !!dbCategory,
   });
-
-  const announcements = [
-    {
-      title: "Black Friday Sale!",
-      description: "Get up to 50% off on selected items",
-      bgColor: "from-primary to-primary/80",
-    },
-    {
-      title: "New Arrivals",
-      description: "Check out the latest smartphones and laptops",
-      bgColor: "from-secondary to-secondary/80",
-    },
-    {
-      title: "Free Delivery",
-      description: "On orders above KSh 10,000",
-      bgColor: "from-primary/80 to-secondary/80",
-    },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
       <main className="flex-1">
-        {/* Announcements Carousel */}
-        <section className="py-8 bg-muted/30">
+        <section className="py-12 bg-gradient-to-br from-primary/10 to-secondary/10">
           <div className="container mx-auto px-4 lg:px-8">
-            <Carousel
-              plugins={[
-                Autoplay({
-                  delay: 4000,
-                }),
-              ]}
-              className="w-full"
-            >
-              <CarouselContent>
-                {announcements.map((announcement, index) => (
-                  <CarouselItem key={index}>
-                    <div
-                      className={`bg-gradient-to-r ${announcement.bgColor} rounded-lg p-12 text-center text-white`}
-                    >
-                      <h2 className="text-3xl lg:text-4xl font-bold mb-2">
-                        {announcement.title}
-                      </h2>
-                      <p className="text-lg lg:text-xl text-white/90">
-                        {announcement.description}
-                      </p>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-4" />
-              <CarouselNext className="right-4" />
-            </Carousel>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">{dbCategory}</h1>
+            <p className="text-xl text-muted-foreground">
+              Browse our collection of {dbCategory?.toLowerCase()}
+            </p>
           </div>
         </section>
 
-        {/* All Products */}
         <section className="py-12">
           <div className="container mx-auto px-4 lg:px-8">
-            <h1 className="text-3xl lg:text-4xl font-bold mb-8">All Products</h1>
-
             {isLoading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
@@ -111,7 +75,7 @@ const Index = () => {
             ) : (
               <div className="text-center py-12">
                 <p className="text-lg text-muted-foreground">
-                  No products available at the moment.
+                  No products found in this category.
                 </p>
               </div>
             )}
@@ -124,4 +88,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default CategoryPage;

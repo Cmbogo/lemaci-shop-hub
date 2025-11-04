@@ -28,45 +28,45 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link to="/" className="hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" className="hover:text-primary transition-colors">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Categories */}
           <div>
             <h3 className="font-semibold mb-4">Categories</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link to="/products?category=Electronics" className="hover:text-primary transition-colors">
-                  Electronics
+                <Link to="/category/smartphones" className="hover:text-primary transition-colors">
+                  Smartphones
                 </Link>
               </li>
               <li>
-                <Link to="/products?category=Accessories" className="hover:text-primary transition-colors">
-                  Accessories
+                <Link to="/category/laptops" className="hover:text-primary transition-colors">
+                  Laptops
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/tablets" className="hover:text-primary transition-colors">
+                  Tablets
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Accessories */}
+          <div>
+            <h3 className="font-semibold mb-4">Accessories</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>
+                <Link to="/category/laptop-accessories" className="hover:text-primary transition-colors">
+                  Laptop Accessories
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/phone-accessories" className="hover:text-primary transition-colors">
+                  Phone Accessories
+                </Link>
+              </li>
+              <li>
+                <Link to="/category/tablet-accessories" className="hover:text-primary transition-colors">
+                  Tablet Accessories
                 </Link>
               </li>
             </ul>

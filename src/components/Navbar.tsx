@@ -9,10 +9,12 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Products", path: "/products" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "Smartphones", path: "/category/smartphones" },
+    { name: "Laptops", path: "/category/laptops" },
+    { name: "Tablets", path: "/category/tablets" },
+    { name: "Laptop Accessories", path: "/category/laptop-accessories" },
+    { name: "Phone Accessories", path: "/category/phone-accessories" },
+    { name: "Tablet Accessories", path: "/category/tablet-accessories" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
