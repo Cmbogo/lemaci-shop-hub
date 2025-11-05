@@ -82,41 +82,65 @@ const Index = () => {
           </div>
         </section>
 
-        {/* All Products */}
-        <section className="py-12">
-          <div className="container mx-auto px-4 lg:px-8">
-            <h1 className="text-3xl lg:text-4xl font-bold mb-8">All Products</h1>
+        {/* Products by Category */}
+        {isLoading ? (
+          <section className="py-12">
+            <div className="container mx-auto px-4 lg:px-8">
+              <div className="h-96 rounded-lg bg-muted animate-pulse" />
+            </div>
+          </section>
+        ) : (
+          <>
+            {["Laptop Accessories", "Smartphones", "Phones"].map((category) => {
+              const categoryProducts = products?.filter(
+                (p) => p.category?.toLowerCase() === category.toLowerCase()
+              );
 
-            {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div key={i} className="h-96 rounded-lg bg-muted animate-pulse" />
-                ))}
-              </div>
-            ) : products && products.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    id={product.id}
-                    name={product.name}
-                    description={product.description || ""}
-                    price={Number(product.price)}
-                    image_url={product.image_url || ""}
-                    category={product.category || ""}
-                    stock={product.stock || 0}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-lg text-muted-foreground">
-                  No products available at the moment.
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
+              if (!categoryProducts || categoryProducts.length === 0) return null;
+
+              return (
+                <section key={category} className="py-12">
+                  <div className="container mx-auto px-4 lg:px-8">
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-8">{category}</h2>
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      plugins={[
+                        Autoplay({
+                          delay: 3000,
+                        }),
+                      ]}
+                      className="w-full"
+                    >
+                      <CarouselContent className="-ml-2 md:-ml-4">
+                        {categoryProducts.map((product) => (
+                          <CarouselItem
+                            key={product.id}
+                            className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                          >
+                            <ProductCard
+                              id={product.id}
+                              name={product.name}
+                              description={product.description || ""}
+                              price={Number(product.price)}
+                              image_url={product.image_url || ""}
+                              category={product.category || ""}
+                              stock={product.stock || 0}
+                            />
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="left-0" />
+                      <CarouselNext className="right-0" />
+                    </Carousel>
+                  </div>
+                </section>
+              );
+            })}
+          </>
+        )}
       </main>
 
       <Footer />
