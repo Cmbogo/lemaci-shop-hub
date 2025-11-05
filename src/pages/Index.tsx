@@ -52,16 +52,16 @@ const Index = () => {
   ];
 
   const featuredWatches = [
-    { id: 1, image: oraimoWatch1, alt: "Oraimo Watch Nova AM" },
-    { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R" },
-    { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER" },
-    { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R" },
+    { id: 1, image: oraimoWatch1, alt: "Oraimo Watch Nova AM", price: 3999 },
+    { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R", price: 4499 },
+    { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER", price: 3799 },
+    { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R", price: 4299 },
   ];
 
   const featuredPhones = [
-    { id: 1, image: phone1, alt: "Redmi 15C" },
-    { id: 2, image: phone2, alt: "Redmi Note 14" },
-    { id: 3, image: phone3, alt: "Redmi 14C" },
+    { id: 1, image: phone1, alt: "Redmi 15C", price: 12999 },
+    { id: 2, image: phone2, alt: "Redmi Note 14", price: 18999 },
+    { id: 3, image: phone3, alt: "Redmi 14C", price: 15499 },
   ];
 
   return (
@@ -70,8 +70,12 @@ const Index = () => {
 
       <main className="flex-1">
         {/* Announcements Carousel */}
-        <section className="py-8 bg-muted/30">
-          <div className="container mx-auto px-4 lg:px-8">
+        <section className="py-8 bg-muted/30 relative overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-30"
+            style={{ backgroundImage: `url(${oraimoWatch1})` }}
+          />
+          <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <Carousel
               plugins={[
                 Autoplay({
@@ -84,7 +88,7 @@ const Index = () => {
                 {announcements.map((announcement, index) => (
                   <CarouselItem key={index}>
                     <div
-                      className={`bg-gradient-to-r ${announcement.bgColor} rounded-lg p-12 text-center text-white`}
+                      className={`bg-gradient-to-r ${announcement.bgColor} rounded-lg p-12 text-center text-white backdrop-blur-sm`}
                     >
                       <h2 className="text-3xl lg:text-4xl font-bold mb-2">
                         {announcement.title}
@@ -118,18 +122,22 @@ const Index = () => {
               ]}
               className="w-full"
             >
-              <CarouselContent className="-ml-2 md:-ml-4">
+              <CarouselContent className="-ml-1 md:-ml-2">
                 {featuredWatches.map((watch) => (
                   <CarouselItem
                     key={watch.id}
-                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/4"
                   >
-                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow max-w-xs mx-auto">
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
                         src={watch.image}
                         alt={watch.alt}
-                        className="w-full h-auto object-cover max-h-64"
+                        className="w-full h-auto object-cover max-h-48"
                       />
+                      <div className="p-3">
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{watch.alt}</p>
+                        <p className="text-lg font-bold text-primary">KSh {watch.price.toLocaleString()}</p>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
@@ -156,18 +164,22 @@ const Index = () => {
               ]}
               className="w-full"
             >
-              <CarouselContent className="-ml-2 md:-ml-4">
+              <CarouselContent className="-ml-1 md:-ml-2">
                 {featuredPhones.map((phone) => (
                   <CarouselItem
                     key={phone.id}
-                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
+                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/3"
                   >
-                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow max-w-xs mx-auto">
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
                         src={phone.image}
                         alt={phone.alt}
-                        className="w-full h-auto object-cover max-h-64"
+                        className="w-full h-auto object-cover max-h-48"
                       />
+                      <div className="p-3">
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{phone.alt}</p>
+                        <p className="text-lg font-bold text-primary">KSh {phone.price.toLocaleString()}</p>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
