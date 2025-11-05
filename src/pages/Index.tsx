@@ -15,6 +15,9 @@ import oraimoWatch1 from "@/assets/oraimo-watch-1.jpg";
 import oraimoWatch2 from "@/assets/oraimo-watch-2.jpg";
 import oraimoWatch3 from "@/assets/oraimo-watch-3.jpg";
 import oraimoWatch4 from "@/assets/oraimo-watch-4.jpg";
+import phone1 from "@/assets/phone-1.jpg";
+import phone2 from "@/assets/phone-2.jpg";
+import phone3 from "@/assets/phone-3.jpg";
 
 const Index = () => {
   const { data: products, isLoading } = useQuery({
@@ -53,6 +56,12 @@ const Index = () => {
     { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R" },
     { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER" },
     { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R" },
+  ];
+
+  const featuredPhones = [
+    { id: 1, image: phone1, alt: "Redmi 15C" },
+    { id: 2, image: phone2, alt: "Redmi Note 14" },
+    { id: 3, image: phone3, alt: "Redmi 14C" },
   ];
 
   return (
@@ -119,6 +128,44 @@ const Index = () => {
                       <img
                         src={watch.image}
                         alt={watch.alt}
+                        className="w-full h-auto object-cover max-h-64"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </Carousel>
+          </div>
+        </section>
+
+        {/* Featured Phones */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Phones</h2>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {featuredPhones.map((phone) => (
+                  <CarouselItem
+                    key={phone.id}
+                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
+                  >
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow max-w-xs mx-auto">
+                      <img
+                        src={phone.image}
+                        alt={phone.alt}
                         className="w-full h-auto object-cover max-h-64"
                       />
                     </div>
