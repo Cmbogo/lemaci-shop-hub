@@ -115,11 +115,11 @@ const Index = () => {
                     key={watch.id}
                     className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
                   >
-                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow max-w-xs mx-auto">
                       <img
                         src={watch.image}
                         alt={watch.alt}
-                        className="w-full h-auto object-cover"
+                        className="w-full h-auto object-cover max-h-64"
                       />
                     </div>
                   </CarouselItem>
