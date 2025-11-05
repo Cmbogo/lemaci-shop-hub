@@ -11,6 +11,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import oraimoWatch1 from "@/assets/oraimo-watch-1.jpg";
+import oraimoWatch2 from "@/assets/oraimo-watch-2.jpg";
+import oraimoWatch3 from "@/assets/oraimo-watch-3.jpg";
+import oraimoWatch4 from "@/assets/oraimo-watch-4.jpg";
 
 const Index = () => {
   const { data: products, isLoading } = useQuery({
@@ -42,6 +46,13 @@ const Index = () => {
       description: "On orders above KSh 10,000",
       bgColor: "from-primary/80 to-secondary/80",
     },
+  ];
+
+  const featuredWatches = [
+    { id: 1, image: oraimoWatch1, alt: "Oraimo Watch Nova AM" },
+    { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R" },
+    { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER" },
+    { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R" },
   ];
 
   return (
@@ -78,6 +89,44 @@ const Index = () => {
               </CarouselContent>
               <CarouselPrevious className="left-4" />
               <CarouselNext className="right-4" />
+            </Carousel>
+          </div>
+        </section>
+
+        {/* Featured Smartwatches */}
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Smartwatches</h2>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {featuredWatches.map((watch) => (
+                  <CarouselItem
+                    key={watch.id}
+                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
+                  >
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
+                      <img
+                        src={watch.image}
+                        alt={watch.alt}
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
             </Carousel>
           </div>
         </section>
