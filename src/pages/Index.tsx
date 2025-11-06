@@ -18,6 +18,11 @@ import oraimoWatch4 from "@/assets/oraimo-watch-4.jpg";
 import phone1 from "@/assets/phone-1.jpg";
 import phone2 from "@/assets/phone-2.jpg";
 import phone3 from "@/assets/phone-3.jpg";
+import heroBg from "@/assets/hero-bg.png";
+import laptop1 from "@/assets/laptop-1.jpg";
+import laptop2 from "@/assets/laptop-2.jpg";
+import laptop3 from "@/assets/laptop-3.jpg";
+import laptop4 from "@/assets/laptop-4.jpg";
 
 const Index = () => {
   const { data: products, isLoading } = useQuery({
@@ -33,22 +38,11 @@ const Index = () => {
     },
   });
 
-  const announcements = [
-    {
-      title: "Black Friday Sale!",
-      description: "Get up to 50% off on selected items",
-      bgColor: "from-primary to-primary/80",
-    },
-    {
-      title: "New Arrivals",
-      description: "Check out the latest smartphones and laptops",
-      bgColor: "from-secondary to-secondary/80",
-    },
-    {
-      title: "Free Delivery",
-      description: "On orders above KSh 10,000",
-      bgColor: "from-primary/80 to-secondary/80",
-    },
+  const featuredLaptops = [
+    { id: 1, image: laptop1, alt: "HP Laptop 250 G7", price: 35999 },
+    { id: 2, image: laptop2, alt: "HP Laptop 15s", price: 42999 },
+    { id: 3, image: laptop3, alt: "HP ProBook 440 G8", price: 48999 },
+    { id: 4, image: laptop4, alt: "HP 15s Lite", price: 38999 },
   ];
 
   const featuredWatches = [
@@ -69,39 +63,63 @@ const Index = () => {
       <Navbar />
 
       <main className="flex-1">
-        {/* Announcements Carousel */}
-        <section className="py-8 bg-muted/30 relative overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden min-h-[400px] flex items-center justify-center">
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-30"
-            style={{ backgroundImage: `url(${oraimoWatch1})` }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${heroBg})` }}
           />
+          <div className="absolute inset-0 bg-black/40" />
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="text-center text-white">
+              <h1 className="text-4xl lg:text-6xl font-bold mb-4">
+                Welcome to Lemaci
+              </h1>
+              <p className="text-lg lg:text-2xl text-white/90">
+                Your trusted tech destination
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Laptops */}
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Laptops</h2>
             <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
               plugins={[
                 Autoplay({
-                  delay: 4000,
+                  delay: 3000,
                 }),
               ]}
               className="w-full"
             >
-              <CarouselContent>
-                {announcements.map((announcement, index) => (
-                  <CarouselItem key={index}>
-                    <div
-                      className={`bg-gradient-to-r ${announcement.bgColor} rounded-lg p-12 text-center text-white backdrop-blur-sm`}
-                    >
-                      <h2 className="text-3xl lg:text-4xl font-bold mb-2">
-                        {announcement.title}
-                      </h2>
-                      <p className="text-lg lg:text-xl text-white/90">
-                        {announcement.description}
-                      </p>
+              <CarouselContent className="-ml-1 md:-ml-2">
+                {featuredLaptops.map((laptop) => (
+                  <CarouselItem
+                    key={laptop.id}
+                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/4"
+                  >
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
+                      <img
+                        src={laptop.image}
+                        alt={laptop.alt}
+                        className="w-full h-auto object-cover max-h-48"
+                      />
+                      <div className="p-3">
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{laptop.alt}</p>
+                        <p className="text-lg font-bold text-primary">KSh {laptop.price.toLocaleString()}</p>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-4" />
-              <CarouselNext className="right-4" />
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
             </Carousel>
           </div>
         </section>
