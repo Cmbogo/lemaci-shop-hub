@@ -23,6 +23,10 @@ import laptop1 from "@/assets/laptop-1.jpg";
 import laptop2 from "@/assets/laptop-2.jpg";
 import laptop3 from "@/assets/laptop-3.jpg";
 import laptop4 from "@/assets/laptop-4.jpg";
+import tablet1 from "@/assets/tablet-1.jpg";
+import tablet2 from "@/assets/tablet-2.webp";
+import tablet3 from "@/assets/tablet-3.jpg";
+import tablet4 from "@/assets/tablet-4.jpg";
 
 const Index = () => {
   const { data: products, isLoading } = useQuery({
@@ -50,6 +54,13 @@ const Index = () => {
     { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R", price: 4499 },
     { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER", price: 3799 },
     { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R", price: 4299 },
+  ];
+
+  const featuredTablets = [
+    { id: 1, image: tablet1, alt: "Xtigi Kids Tablet", price: 8999 },
+    { id: 2, image: tablet2, alt: "Modio Kids Tablet", price: 9499 },
+    { id: 3, image: tablet3, alt: "Droipad Tablet", price: 11999 },
+    { id: 4, image: tablet4, alt: "Megapad Tablet", price: 13499 },
   ];
 
   const featuredPhones = [
@@ -166,8 +177,50 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Featured Phones */}
+        {/* Featured Tablets */}
         <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Tablets</h2>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 3000,
+                }),
+              ]}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-1 md:-ml-2">
+                {featuredTablets.map((tablet) => (
+                  <CarouselItem
+                    key={tablet.id}
+                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/4"
+                  >
+                    <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
+                      <img
+                        src={tablet.image}
+                        alt={tablet.alt}
+                        className="w-full h-auto object-cover max-h-48"
+                      />
+                      <div className="p-3">
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{tablet.alt}</p>
+                        <p className="text-lg font-bold text-primary">KSh {tablet.price.toLocaleString()}</p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </Carousel>
+          </div>
+        </section>
+
+        {/* Featured Phones */}
+        <section className="py-12 bg-background">
           <div className="container mx-auto px-4 lg:px-8">
             <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Phones</h2>
             <Carousel
