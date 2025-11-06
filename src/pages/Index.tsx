@@ -11,22 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import oraimoWatch1 from "@/assets/oraimo-watch-1.jpg";
-import oraimoWatch2 from "@/assets/oraimo-watch-2.jpg";
-import oraimoWatch3 from "@/assets/oraimo-watch-3.jpg";
-import oraimoWatch4 from "@/assets/oraimo-watch-4.jpg";
-import phone1 from "@/assets/phone-1.jpg";
-import phone2 from "@/assets/phone-2.jpg";
-import phone3 from "@/assets/phone-3.jpg";
 import heroBg from "@/assets/hero-bg.png";
-import laptop1 from "@/assets/laptop-1.jpg";
-import laptop2 from "@/assets/laptop-2.jpg";
-import laptop3 from "@/assets/laptop-3.jpg";
-import laptop4 from "@/assets/laptop-4.jpg";
-import tablet1 from "@/assets/tablet-1.jpg";
-import tablet2 from "@/assets/tablet-2.webp";
-import tablet3 from "@/assets/tablet-3.jpg";
-import tablet4 from "@/assets/tablet-4.jpg";
 
 const Index = () => {
   const { data: products, isLoading } = useQuery({
@@ -42,32 +27,10 @@ const Index = () => {
     },
   });
 
-  const featuredLaptops = [
-    { id: 1, image: laptop1, alt: "HP Laptop 250 G7", price: 35999 },
-    { id: 2, image: laptop2, alt: "HP Laptop 15s", price: 42999 },
-    { id: 3, image: laptop3, alt: "HP ProBook 440 G8", price: 48999 },
-    { id: 4, image: laptop4, alt: "HP 15s Lite", price: 38999 },
-  ];
-
-  const featuredWatches = [
-    { id: 1, image: oraimoWatch1, alt: "Oraimo Watch Nova AM", price: 3999 },
-    { id: 2, image: oraimoWatch2, alt: "Oraimo Watch 2R", price: 4499 },
-    { id: 3, image: oraimoWatch3, alt: "Oraimo Watch ER", price: 3799 },
-    { id: 4, image: oraimoWatch4, alt: "Oraimo Watch 2R", price: 4299 },
-  ];
-
-  const featuredTablets = [
-    { id: 1, image: tablet1, alt: "Xtigi Kids Tablet", price: 8999 },
-    { id: 2, image: tablet2, alt: "Modio Kids Tablet", price: 9499 },
-    { id: 3, image: tablet3, alt: "Droipad Tablet", price: 11999 },
-    { id: 4, image: tablet4, alt: "Megapad Tablet", price: 13499 },
-  ];
-
-  const featuredPhones = [
-    { id: 1, image: phone1, alt: "Redmi 15C", price: 12999 },
-    { id: 2, image: phone2, alt: "Redmi Note 14", price: 18999 },
-    { id: 3, image: phone3, alt: "Redmi 14C", price: 15499 },
-  ];
+  const featuredLaptops = products?.filter(p => p.category === 'laptops') || [];
+  const featuredWatches = products?.filter(p => p.category === 'smartwatches') || [];
+  const featuredTablets = products?.filter(p => p.category === 'tablets') || [];
+  const featuredPhones = products?.filter(p => p.category === 'smartphones') || [];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -117,13 +80,13 @@ const Index = () => {
                   >
                     <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
-                        src={laptop.image}
-                        alt={laptop.alt}
+                        src={laptop.image_url}
+                        alt={laptop.name}
                         className="w-full h-auto object-cover max-h-48"
                       />
                       <div className="p-3">
-                        <p className="text-sm font-medium line-clamp-1 mb-1">{laptop.alt}</p>
-                        <p className="text-lg font-bold text-primary">KSh {laptop.price.toLocaleString()}</p>
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{laptop.name}</p>
+                        <p className="text-lg font-bold text-primary">KSh {Number(laptop.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </CarouselItem>
@@ -159,13 +122,13 @@ const Index = () => {
                   >
                     <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
-                        src={watch.image}
-                        alt={watch.alt}
+                        src={watch.image_url}
+                        alt={watch.name}
                         className="w-full h-auto object-cover max-h-48"
                       />
                       <div className="p-3">
-                        <p className="text-sm font-medium line-clamp-1 mb-1">{watch.alt}</p>
-                        <p className="text-lg font-bold text-primary">KSh {watch.price.toLocaleString()}</p>
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{watch.name}</p>
+                        <p className="text-lg font-bold text-primary">KSh {Number(watch.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </CarouselItem>
@@ -201,13 +164,13 @@ const Index = () => {
                   >
                     <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
-                        src={tablet.image}
-                        alt={tablet.alt}
+                        src={tablet.image_url}
+                        alt={tablet.name}
                         className="w-full h-auto object-cover max-h-48"
                       />
                       <div className="p-3">
-                        <p className="text-sm font-medium line-clamp-1 mb-1">{tablet.alt}</p>
-                        <p className="text-lg font-bold text-primary">KSh {tablet.price.toLocaleString()}</p>
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{tablet.name}</p>
+                        <p className="text-lg font-bold text-primary">KSh {Number(tablet.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </CarouselItem>
@@ -243,13 +206,13 @@ const Index = () => {
                   >
                     <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
                       <img
-                        src={phone.image}
-                        alt={phone.alt}
+                        src={phone.image_url}
+                        alt={phone.name}
                         className="w-full h-auto object-cover max-h-48"
                       />
                       <div className="p-3">
-                        <p className="text-sm font-medium line-clamp-1 mb-1">{phone.alt}</p>
-                        <p className="text-lg font-bold text-primary">KSh {phone.price.toLocaleString()}</p>
+                        <p className="text-sm font-medium line-clamp-1 mb-1">{phone.name}</p>
+                        <p className="text-lg font-bold text-primary">KSh {Number(phone.price).toLocaleString()}</p>
                       </div>
                     </div>
                   </CarouselItem>
