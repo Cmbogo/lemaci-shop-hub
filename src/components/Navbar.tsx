@@ -3,6 +3,7 @@ import { ShoppingCart, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import logo from "@/assets/lemaci-logo.png";
+import SearchDialog from "@/components/SearchDialog";
 
 const Navbar = () => {
   const location = useLocation();
@@ -46,26 +47,29 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Contact Info & Cart */}
+          {/* Contact Info, Search & Cart */}
           <div className="hidden lg:flex items-center space-x-6">
             <div className="text-sm">
               <div className="font-medium">071 392 9274</div>
               <div className="text-muted-foreground text-xs">cicilymbogo820@gmail.com</div>
             </div>
+            <SearchDialog />
             <Button size="icon" variant="outline" className="relative">
               <ShoppingCart className="h-5 w-5" />
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          {/* Mobile Search & Menu */}
+          <div className="flex md:hidden items-center gap-2">
+            <SearchDialog />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
