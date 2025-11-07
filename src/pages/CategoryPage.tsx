@@ -10,12 +10,13 @@ const CategoryPage = () => {
   
   // Convert URL format to database format
   const categoryMap: Record<string, string> = {
-    "smartphones": "Smartphones",
-    "laptops": "Laptops",
-    "tablets": "Tablets",
-    "laptop-accessories": "Laptop Accessories",
-    "phone-accessories": "Phone Accessories",
-    "tablet-accessories": "Tablet Accessories",
+    "smartphones": "smartphones",
+    "laptops": "laptops",
+    "tablets": "tablets",
+    "smartwatches": "smartwatches",
+    "laptop-accessories": "laptop accessories",
+    "phone-accessories": "phone accessories",
+    "tablet-accessories": "tablet accessories",
   };
 
   const dbCategory = categoryMap[category || ""];
@@ -42,9 +43,9 @@ const CategoryPage = () => {
       <main className="flex-1">
         <section className="py-12 bg-gradient-to-br from-primary/10 to-secondary/10">
           <div className="container mx-auto px-4 lg:px-8">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4">{dbCategory}</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4 capitalize">{dbCategory}</h1>
             <p className="text-xl text-muted-foreground">
-              Browse our collection of {dbCategory?.toLowerCase()}
+              Browse our collection of {dbCategory}
             </p>
           </div>
         </section>

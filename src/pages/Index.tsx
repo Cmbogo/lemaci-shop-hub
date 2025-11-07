@@ -30,7 +30,7 @@ const Index = () => {
   const featuredLaptops = products?.filter(p => p.category === 'laptops') || [];
   const featuredWatches = products?.filter(p => p.category === 'smartwatches') || [];
   const featuredTablets = products?.filter(p => p.category === 'tablets') || [];
-  const featuredPhones = products?.filter(p => p.category === 'smartphones') || [];
+  const featuredPhones = products?.filter(p => p.category === 'smartphones' || p.category === 'phones') || [];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -182,10 +182,10 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Featured Phones */}
+        {/* Featured Smartphones */}
         <section className="py-12 bg-background">
           <div className="container mx-auto px-4 lg:px-8">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Phones</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-8">Featured Smartphones</h2>
             <Carousel
               opts={{
                 align: "start",
@@ -202,14 +202,16 @@ const Index = () => {
                 {featuredPhones.map((phone) => (
                   <CarouselItem
                     key={phone.id}
-                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/3"
+                    className="pl-1 md:pl-2 basis-1/2 sm:basis-1/3 lg:basis-1/4"
                   >
                     <div className="rounded-lg overflow-hidden bg-card border border-border hover:shadow-lg transition-shadow">
-                      <img
-                        src={phone.image_url}
-                        alt={phone.name}
-                        className="w-full h-auto object-cover max-h-48"
-                      />
+                      <div className="aspect-square overflow-hidden bg-muted flex items-center justify-center p-4">
+                        <img
+                          src={phone.image_url}
+                          alt={phone.name}
+                          className="w-auto h-full object-contain max-h-48"
+                        />
+                      </div>
                       <div className="p-3">
                         <p className="text-sm font-medium line-clamp-1 mb-1">{phone.name}</p>
                         <p className="text-lg font-bold text-primary">KSh {Number(phone.price).toLocaleString()}</p>
