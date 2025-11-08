@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CategoryPage from "./pages/CategoryPage";
+import SubcategoryPage from "./pages/SubcategoryPage";
 import ProductDetail from "./pages/ProductDetail";
 import MigrateImages from "./pages/MigrateImages";
 import NotFound from "./pages/NotFound";
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/category/:category/:subcategory" element={<SubcategoryPage />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/migrate-images" element={<MigrateImages />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
